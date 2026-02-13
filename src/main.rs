@@ -10,7 +10,8 @@ mod wscom {
 
 fn main() {
     //t1::ma();
-    wscom_main::wscom();
+    //wscom_main::wsmutex();
+    wscom_main::wsrwlock();
 }
 
 
