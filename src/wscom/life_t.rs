@@ -1,5 +1,4 @@
 /*
-
 El Escenario: "El Procesador de Logs Inteligente"
 Imagina que recibimos líneas de texto (logs) que están "sucias". Queremos procesarlas en 3 etapas:
 
