@@ -36,6 +36,6 @@ fn main() {
     //parte yiiiiha
     //let _ = p1_generador::generar_fichero_logs("./src/yiiiha/hola.txt", 300_000_000);
     //let _ = p1_generador::generar_fichero_logs("./src/yiiiha/hola2.txt", 30_000_000);
-    //let _ = p2_procesador::main();
-    let _ = p2_procesador_ia::main();
+    let _ = p2_procesador::main();
+    //let _ = p2_procesador_ia::main();
 }

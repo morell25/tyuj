@@ -56,8 +56,6 @@ pub fn main() -> std::io::Result<()> {
         .map(|linea| {
             // Procesamiento ultra rápido de la línea
             if let Some(log) = parse_line(linea) {
-                // Aquí podrías hacer algo con el log.
-                // Por ahora solo contamos para medir rendimiento.
                 1
             } else {
                 0
