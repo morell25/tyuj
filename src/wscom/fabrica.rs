@@ -1,33 +1,20 @@
 /*
 El Escenario: "El Analizador de Calidad de Sensores"
 Imagina una fábrica con miles de sensores de temperatura. Los sensores envían lecturas constantemente, pero los datos vienen "sucios" y desordenados. Necesitamos un sistema que procese estas lecturas en tiempo real.
-
 El Objetivo:
 Tienes que crear un sistema que reciba un Vec<Lectura> y nos diga la temperatura media por tipo de sensor.
-
 Las 3 Fases del Sistema:
 Fase 1: El Validador (Paralelo con thread::scope):
-
 Recibe el Vec inicial.
-
 Divide el trabajo en chunks.
-
 Cada hilo debe filtrar las lecturas: si la temperatura es menor a -50°C o mayor a 150°C, es un error del sensor y se descarta.
-
 Pasa las lecturas válidas a la siguiente fase mediante un canal.
-
 Fase 2: El Clasificador (Hilo Único):
-
 Recibe las lecturas válidas del canal.
-
 Su trabajo es agruparlas. Pero para no saturar al de la fase 3, solo envía paquetes de 10 en 10 (un Vec de 10 lecturas cada vez).
-
 Fase 3: El Estadístico (Hilo Único):
-
 Recibe los paquetes de 10 lecturas.
-
 Mantiene un HashMap global donde guarda: (TipoDeSensor, (SumaTotalTemps, CantidadDeLecturas)).
-
 Al final, imprime la media de cada tipo.
 */
 use std::collections::HashMap;

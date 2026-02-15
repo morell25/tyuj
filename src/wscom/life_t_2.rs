@@ -3,9 +3,7 @@ El Escenario: "El Procesador de Logs Inteligente"
 Imagina que recibimos líneas de texto (logs) que están "sucias". Queremos procesarlas en 3 etapas:
 
 Etapa 1 (Limpiador): Recibe el texto, lo pone todo en minúsculas y elimina símbolos raros.
-
 Etapa 2 (Analista): Cuenta cuántas palabras tiene y decide si es un log "importante" (ej. si contiene la palabra "error").
-
 Etapa 3 (Escritor): Guarda el resultado final en un "archivo" (nuestra caché o un println!).
 
 */
