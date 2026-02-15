@@ -20,7 +20,7 @@ Al final, imprime la media de cada tipo.
 use std::collections::HashMap;
 use std::sync::mpsc::channel;
 use std::sync::Mutex;
-use std::time::{SystemTime, UNIX_EPOCH};
+use std::time::{Instant, SystemTime, UNIX_EPOCH};
 use std::thread;
 
 #[derive(Debug, Clone)]
@@ -31,8 +31,10 @@ struct Lectura {
 }
 
 pub fn main() {
+    let inicio = Instant::now();
     let estadisticas = Mutex::new(HashMap::<String, (f64, u32)>::new());
-    let lecturas = generar_lecturas(1000);
+    let lecturas = generar_lecturas(1_00_000);
+    //50 millones -> 34 segundos
     
     let (tx1, rx1) = channel(); 
     let (tx2, rx2) = channel::<Vec<&Lectura>>(); 
@@ -91,6 +93,8 @@ pub fn main() {
         let media = suma / cuenta as f64;
         println!("Sensor: {:<12} | Muestras: {:<4} | Media: {:.2}°C", tipo, cuenta, media);
     }
+    let duracion = inicio.elapsed();
+    println!("El programa tardó: {:?}", duracion);
 }
 
 // Generador de datos de prueba, generado con IA

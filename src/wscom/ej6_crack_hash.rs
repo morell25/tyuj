@@ -22,7 +22,7 @@ Dinámica:
 
 */
 
-use std::{sync::{Arc, Mutex, mpsc::{Receiver, channel}}, thread::{self, JoinHandle}, time::Duration};
+use std::{sync::{Arc, Mutex, mpsc::{Receiver, channel}}, thread::{self, JoinHandle}, time::{Duration, Instant}};
 
 #[derive(Debug)]
 struct Tarea {
@@ -32,6 +32,11 @@ struct Tarea {
 }
 
 pub fn main(){
+    let inicio = Instant::now();
+    // diezmil tareas con 25 hilos virtuales
+    // 20% de uso mas o menos en promedio
+    // 120.54
+    // Medicion haciendo dormir al hilo entre 100 y 500 milisegundos
 
 let (tx_tareas, rx_tareas) = channel();
 let (tx_resultados, rx_resultados) = channel::<Tarea>(); 
@@ -49,7 +54,7 @@ let (tx_resultados, rx_resultados) = channel::<Tarea>();
 let cinta:Arc<Mutex<Receiver<Tarea>>> = Arc::new(Mutex::new(rx_tareas));
 let mut vec_hilos:Vec<JoinHandle<()>> = Vec::new();
 
-    for _ in 0..=4 {
+    for _ in 0..=24 {
         let cinta_c = cinta.clone();
         let enviador = tx_resultados.clone();
         let join_hanlder = thread::spawn(move||{
@@ -71,7 +76,7 @@ let mut vec_hilos:Vec<JoinHandle<()>> = Vec::new();
     }
 
 
-    for i in 0..20 {
+    for i in 0..10000 {
         let dificultad = (i % 5 + 1) * 100; // Unas tardan más que otras
         tx_tareas.send(Tarea { id: i, hash_objetivo: i as u64 * 100, dificultad }).unwrap();
     }
@@ -86,7 +91,8 @@ let mut vec_hilos:Vec<JoinHandle<()>> = Vec::new();
     for x in vec_hilos {
         x.join().unwrap();
     }
-
+let duracion = inicio.elapsed();
+    println!("El programa tardó: {:?}", duracion);
 
 }
 
