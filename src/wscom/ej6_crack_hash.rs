@@ -36,6 +36,16 @@ pub fn main(){
 let (tx_tareas, rx_tareas) = channel();
 let (tx_resultados, rx_resultados) = channel::<Tarea>(); 
 
+//Cinta hacer referencia a lo que seria una cinta de trabajo
+//donde el hilo principal envia tarea
+//y los n hilos hijos las van recibiendo
+
+/*
+    Esto lo hacemos asi porque con un .chunk tenemos el "problema" de que si un chunk es muy pesado de procesar
+    el resto de hilos quedarian esperando
+
+*/
+
 let cinta:Arc<Mutex<Receiver<Tarea>>> = Arc::new(Mutex::new(rx_tareas));
 let mut vec_hilos:Vec<JoinHandle<()>> = Vec::new();
 
@@ -68,8 +78,6 @@ let mut vec_hilos:Vec<JoinHandle<()>> = Vec::new();
 
     drop(tx_tareas);
     drop(tx_resultados);
-
-
 
     while let Ok(tarea) = rx_resultados.recv() {
         println!("{:?}", tarea)

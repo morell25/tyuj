@@ -23,7 +23,7 @@ struct LogProcesado {
     es_critico: bool,
 }
 
-pub fn main_t() {
+pub fn main() {
     let (tx1, rx1) = mpsc::channel::<LogProcesado>();
     let (tx2, rx2) = mpsc::channel::<LogProcesado>();
     let (tx3, rx3) = mpsc::channel::<LogProcesado>();
@@ -69,7 +69,7 @@ fn et1(rx: Receiver<LogProcesado>, sender: Sender<LogProcesado>) -> thread::Join
                 .filter(|a| a.is_alphanumeric() || a.is_whitespace())
                 .collect::<String>();
 
-            sender.send(texto);
+            let _ = sender.send(texto);
         }
     })
 }
@@ -91,7 +91,7 @@ fn et2(rx: Receiver<LogProcesado>, sx2: Sender<LogProcesado>)-> thread::JoinHand
 
             lol.num_palabras = word_counter;
 
-            sx2.send(lol);
+            let _ = sx2.send(lol);
         };
     })
 }

@@ -16,7 +16,7 @@ struct Voto {
     candidato: String,
     region: String,
 }
-pub fn main_t() {
+pub fn main() {
     let vec_total_votos: Vec<Voto> = generar_votos();
     let (tx, rx) = channel();
     thread::scope(|p| {

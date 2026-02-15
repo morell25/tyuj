@@ -19,7 +19,7 @@ enum Estados {
     Finalizado
 }
 
-pub fn ma(){
+pub fn main(){
     //canal para enviar
     let (tx, rx) = channel::<Proces>();
     //lista de procesos

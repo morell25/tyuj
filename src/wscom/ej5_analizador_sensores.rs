@@ -30,7 +30,7 @@ struct Lectura {
     valor: f64,
 }
 
-pub fn main_f() {
+pub fn main() {
     let estadisticas = Mutex::new(HashMap::<String, (f64, u32)>::new());
     let lecturas = generar_lecturas(1000);
     

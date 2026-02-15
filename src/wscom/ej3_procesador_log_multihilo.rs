@@ -24,7 +24,7 @@ struct LogProcesado {
     es_critico: bool,
 }
 
-pub fn main_t() {
+pub fn main() {
     let (tx1, rx1) = mpsc::channel::<LogProcesado>();
     let (tx2, rx2) = mpsc::channel::<LogProcesado>();
     let (tx3, rx3) = mpsc::channel::<LogProcesado>();
