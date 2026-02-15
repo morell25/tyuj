@@ -1,4 +1,4 @@
-use crate::wscom::{life_t, life_t_2, t1, wscom_main};
+use crate::wscom::{fabrica, life_t, life_t_2, t1, vot_1, wscom_main};
 
 
 mod wscom {
@@ -6,6 +6,8 @@ mod wscom {
     pub mod t1;
     pub mod life_t;
     pub mod life_t_2;
+    pub mod vot_1;
+    pub mod fabrica;
 }
 
 
@@ -15,7 +17,9 @@ fn main() {
     //wscom_main::wsmutex();
     //wscom_main::wsrwlock();
     //life_t::main_t()
-    life_t_2::main_t();
+    //life_t_2::main_t();
+    //vot_1::main_t();
+    fabrica::main_f();
 }
 
 
